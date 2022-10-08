@@ -9,10 +9,10 @@ async function main() {
 
   // If we had constructor arguments, they would be passed into deploy()
   let qiStablecoin = await qiStablecoinFactory.deploy(
-            "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0", // mainnet 0xAB594600376Ec9fD91F8e885dADF0CE036862dE0
+            "0x663855969c85f3be415807250414ca9129533a5f", // mainnet 0xAB594600376Ec9fD91F8e885dADF0CE036862dE0
             150,                                          // mumbai 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
-            'miMATIC',
-            'miMATIC',
+            'dCOP',
+            'dCOP',
             vaultContract.address
             );
   // The address the Contract WILL have once mined
@@ -30,7 +30,7 @@ async function main() {
 
   console.log("transferring ownership to the Ledger wallet.");
 
-  await qiStablecoin.transferOwnership("0x86fE8d6D4C8A007353617587988552B6921514Cb")
+  await qiStablecoin.transferOwnership("0x8E744F1CbbF9282Dd468A32b9A7402689f16EA2e")
 
   const secondOwner = await qiStablecoin.owner(); 
   console.log(secondOwner);

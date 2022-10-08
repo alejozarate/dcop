@@ -2,9 +2,9 @@
  *Submitted for verification at Etherscan.io on 2020-09-12
 */
 
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 
 interface IERC20 {

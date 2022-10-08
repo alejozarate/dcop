@@ -1,10 +1,10 @@
 
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./erc20Stablecoin-cam-wbtc.sol";
 
-contract erc20QiStablecoincamwbtc is erc20Stablecoincamwbtc, Ownable {
+abstract contract erc20QiStablecoincamwbtc is erc20Stablecoincamwbtc, Ownable {
 
     constructor(
         address ethPriceSourceAddress,
@@ -24,7 +24,7 @@ contract erc20QiStablecoincamwbtc is erc20Stablecoincamwbtc, Ownable {
         _collateral,
         meta,
         baseURI
-    ) public {
+    ) {
         treasury=0;
     }
 
@@ -75,7 +75,4 @@ contract erc20QiStablecoincamwbtc is erc20Stablecoincamwbtc, Ownable {
         mai.transfer(address(mai), amountToken);
     }
 
-    function setBaseURI(string memory baseURI) public onlyOwner() {
-        _setBaseURI(baseURI);
-    }
 }

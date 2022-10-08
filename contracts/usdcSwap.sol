@@ -1,11 +1,11 @@
 
 // contracts/usdcSwap.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.5;
+pragma solidity 0.8.1;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract usdcSwap is ReentrancyGuard {
     using SafeMath for uint256;

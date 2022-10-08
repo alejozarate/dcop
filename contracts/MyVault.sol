@@ -1,15 +1,15 @@
 
 // contracts/MyVaultNFT.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.5;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract VaultNFT is ERC721Full {
+contract VaultNFT is ERC721 {
         
     address admin;
     
-    constructor() public ERC721Full("miMATIC Vault", "MMTV") {
+    constructor() ERC721("", "") {
         admin = msg.sender;
     }
     

@@ -1,10 +1,10 @@
 
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./erc20Stablecoin-wbtc.sol";
 
-contract erc20QiStablecoinwbtc is erc20Stablecoinwbtc, Ownable {
+abstract contract erc20QiStablecoinwbtc is erc20Stablecoinwbtc, Ownable {
 
     constructor(
         address ethPriceSourceAddress,
@@ -24,7 +24,7 @@ contract erc20QiStablecoinwbtc is erc20Stablecoinwbtc, Ownable {
         _collateral,
         meta,
         baseURI
-    ) public {
+    ) {
         treasury=0;
     }
 
@@ -73,9 +73,5 @@ contract erc20QiStablecoinwbtc is erc20Stablecoinwbtc, Ownable {
     function transferToken(uint256 amountToken) public onlyOwner() {
         // Transfer reserve tokens back to main MAI contract
         mai.transfer(address(mai), amountToken);
-    }
-
-    function setBaseURI(string memory baseURI) public onlyOwner() {
-        _setBaseURI(baseURI);
     }
 }

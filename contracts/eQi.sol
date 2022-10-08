@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: agpl-3.0
 
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/ownership/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 // escrowed Qi (eQi)
 // This contract lets you lock your Qi for up to 4 years
 // giving you a Qi Dao platform multiplier (up to 4x) which can be used across its products.
 
-contract eQi is ERC20, ReentrancyGuard, Ownable, ERC20Detailed("escrowed Qi", "eQi", 18) {
+contract eQi is ReentrancyGuard, Ownable, ERC20("escrowed Qi", "eQi") {
 
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
@@ -88,7 +87,7 @@ contract eQi is ERC20, ReentrancyGuard, Ownable, ERC20Detailed("escrowed Qi", "e
         return userInfo[msg.sender].endBlock;
     }
 
-    function balanceOf(address user) public view returns (uint256){
+    function balanceOf(address user) override public view returns (uint256){
         // it starts as *3+1 for a 4x-max boost
         if (userInfo[user].endBlock <= block.number || userInfo[user].amount == 0){
             return userInfo[user].amount;
@@ -118,8 +117,8 @@ contract eQi is ERC20, ReentrancyGuard, Ownable, ERC20Detailed("escrowed Qi", "e
     }
 
     // no transfers, nothing
-    function allowance(address, address) public view returns (uint256) { return 0; }
-    function transfer(address, uint256) public returns (bool) { return false; }
-    function approve(address, uint256) public returns (bool) { return false; }
-    function transferFrom(address, address, uint256) public returns (bool) { return false; }
+    function allowance(address, address) public view override returns (uint256) { return 0; }
+    function transfer(address, uint256) public override returns (bool) { return false; }
+    function approve(address, uint256) public override returns (bool) { return false; }
+    function transferFrom(address, address, uint256) public override returns (bool) { return false; }
 }

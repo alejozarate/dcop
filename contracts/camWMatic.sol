@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: agpl-3.0
 
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./interfaces/IAaveIncentivesController.sol";
 import "./interfaces/ILendingPool.sol";
 
 // stake Token to earn more Token (from farming)
 // This contract handles swapping to and from uMiMatic, a staked version of miMatic stable coin.
-contract camWMATIC is ERC20, ERC20Detailed("Compounding Aave Market Matic", "camWMATIC", 18) {
+contract camWMATIC is ERC20("Compounding Aave Market Matic", "camWMATIC") {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
     

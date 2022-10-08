@@ -1,26 +1,24 @@
 // contracts/MyVaultNFT.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./interfaces/IVaultMetaProvider.sol";
 import "./interfaces/IVaultMetaRegistry.sol";
 
 
-contract VaultNFTv3 is ERC721Full {
+abstract contract VaultNFTv3 is ERC721Enumerable {
 
     address public _meta;
     string public base;
 
     constructor(string memory name, string memory symbol, address meta, string memory baseURI)
-        public
-        ERC721Full(name, symbol)
     {
         _meta = meta;
         base=baseURI;
     }
 
-    function tokenURI(uint256 tokenId) public view returns (string memory) {
+    function tokenURI(uint256 tokenId) override public view returns (string memory) {
         require(_exists(tokenId));
 
         IVaultMetaRegistry registry = IVaultMetaRegistry(_meta);

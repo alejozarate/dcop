@@ -24,10 +24,22 @@ const config: HardhatUserConfig = {
         runs: 1000
       }
     }
-  }],
+  },{ version: "0.8.1", settings: {
+    optimizer: {
+      enabled: true,
+      runs: 1000
+    }
+  }
+} ],
   },
   networks: {
-    hardhat: {},
+    hardhat: {
+      
+    },
+    stardust: {
+      url: `https://stardust.metis.io/?owner=588`,
+      accounts: [String(process.env.MATIC_KEY)],
+    },
     mumbai: {
       url: `https://rpc-mumbai.maticvigil.com/`,
       accounts: [String(process.env.MATIC_KEY)],

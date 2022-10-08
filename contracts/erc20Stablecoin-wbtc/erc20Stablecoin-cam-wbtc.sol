@@ -1,20 +1,19 @@
-pragma solidity 0.5.16;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-import "../oracles/shareOracle.sol";
+import "../../oracles/shareOracle.sol";
 
 import "../MyVaultV3.sol";
 
-contract erc20Stablecoincamwbtc is ReentrancyGuard, VaultNFTv3 {
+abstract contract erc20Stablecoincamwbtc is ReentrancyGuard, VaultNFTv3 {
     shareOracle public ethPriceSource;
     
     using SafeMath for uint256;
-    using SafeERC20 for ERC20Detailed;
+    using SafeERC20 for ERC20;
 
     uint256 public _minimumCollateralPercentage;
 
@@ -33,9 +32,9 @@ contract erc20Stablecoincamwbtc is ReentrancyGuard, VaultNFTv3 {
 
     address public stabilityPool;
 
-    ERC20Detailed public collateral;
+    ERC20 public collateral;
 
-    ERC20Detailed public mai;
+    ERC20 public mai;
 
     event CreateVault(uint256 vaultID, address creator);
     event DestroyVault(uint256 vaultID);
@@ -57,7 +56,7 @@ contract erc20Stablecoincamwbtc is ReentrancyGuard, VaultNFTv3 {
         address _collateral,
         address meta,
         string memory baseURI
-    ) VaultNFTv3(name, symbol, meta, baseURI) public {
+    ) VaultNFTv3(name, symbol, meta, baseURI) {
         assert(ethPriceSourceAddress != address(0));
         assert(minimumCollateralPercentage != 0);
                         //  | decimals start here
@@ -72,8 +71,8 @@ contract erc20Stablecoincamwbtc is ReentrancyGuard, VaultNFTv3 {
 
         _minimumCollateralPercentage = minimumCollateralPercentage;
 
-        collateral = ERC20Detailed(_collateral);
-        mai = ERC20Detailed(_mai);
+        collateral = ERC20(_collateral);
+        mai = ERC20(_mai);
     }
 
     modifier onlyVaultOwner(uint256 vaultID) {

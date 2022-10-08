@@ -1,11 +1,11 @@
 
 // contracts/liquidator.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.5;
+pragma solidity 0.8.1;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./Stablecoin.sol";
 
@@ -83,7 +83,7 @@ contract liquidator is ReentrancyGuard {
         require(maticDebt[msg.sender]!=0, "Don't have anything for you.");
         uint256 amount = maticDebt[msg.sender];
         maticDebt[msg.sender]=0;
-        msg.sender.transfer(amount);
+        payable(msg.sender).transfer(amount);
     }
 
     function checkLiquidation (uint256 _vaultId) public view {
@@ -181,5 +181,5 @@ contract liquidator is ReentrancyGuard {
         maticDebt[msg.sender] = maticDebt[msg.sender].add(maticExtract);
     }
 
-    function() external payable { }
+    fallback() external payable { }
 }

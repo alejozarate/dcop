@@ -1,4 +1,4 @@
-pragma solidity 0.8.0;
+pragma solidity 0.8.1;
 
 contract SimpleRegistry {
     mapping (string => string) public _registry;

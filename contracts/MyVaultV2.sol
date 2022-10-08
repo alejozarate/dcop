@@ -1,13 +1,14 @@
 
 // contracts/MyVaultNFT.sol
 // SPDX-License-Identifier: MIT
-pragma solidity 0.5.5;
+pragma solidity 0.8.1;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract VaultNFTv2 is ERC721Full {
+abstract contract VaultNFTv2 is ERC721Enumerable {
             
-    constructor(string memory name, string memory symbol) public ERC721Full(name, symbol) {}
+    constructor(string memory _name, string memory _symbol) {
+    }
 
     function _transferFrom(address from, address to, uint256 tokenId) internal {
         revert("transfer: disabled");
