@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "dcop",
   "builds": [
      { "src": "./dcop-frontend/", "use": "@vercel/node" }
