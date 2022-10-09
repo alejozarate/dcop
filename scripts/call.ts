@@ -1036,7 +1036,10 @@ async function main() {
   ];
   const factory = await ethers.getContractAt(ABI, "0x1a2bcd22badd4acf274a15a81b2a23fc53232b32");
   
-  await factory.mint("0x8E744F1CbbF9282Dd468A32b9A7402689f16EA2e", 1000000000000);
+  //await factory.mint("0x8E744F1CbbF9282Dd468A32b9A7402689f16EA2e", 1000000000000);
+  const debtCeiling = await factory.changeEthPriceSource("0x212cf4109045db8dbb299fdaa65e7db2996d3ac9");
+
+  console.log(debtCeiling);
 }
 
 main()

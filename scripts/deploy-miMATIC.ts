@@ -9,7 +9,7 @@ async function main() {
 
   // If we had constructor arguments, they would be passed into deploy()
   let qiStablecoin = await qiStablecoinFactory.deploy(
-            "0x663855969c85f3be415807250414ca9129533a5f", // mainnet 0xAB594600376Ec9fD91F8e885dADF0CE036862dE0
+            "0xBf6Cb984f327223eF92DeDF927edE317661b0F87", // mainnet 0xAB594600376Ec9fD91F8e885dADF0CE036862dE0
             150,                                          // mumbai 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
             'dCOP',
             'dCOP',
