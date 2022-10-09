@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "dcop",
+  "builds": [
+     { "src": "./dcop-frontend/", "use": "@vercel/node" }
+  ],
+  "routes": [
+     { "src": "/(.*)", "dest": "/app.js" }
+  ]
+}
